@@ -14,7 +14,8 @@ const   beachRoutes     = require('./routes/beaches'),
         indexRoutes     = require('./routes/index')
 
 // mongoose.connect(`mongodb://localhost:27017/beach_camp`, { useNewUrlParser: true })
-mongoose.connect(`mongodb://brad.rumack:04MiniMC40@ds153304.mlab.com:53304/wavez`, { useNewUrlParser: true })
+// mongoose.connect(`mongodb://brad.rumack:04MiniMC40@ds153304.mlab.com:53304/wavez`, { useNewUrlParser: true })
+mongoose.connect(process.env.DBURL, { useNewUrlParser: true})
 app.use(bodyParser.urlencoded({extended:true}))
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + `/public`))
