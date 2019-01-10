@@ -1,0 +1,20 @@
+<% include ../partials/header %>
+
+<div class="container new">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- <h3> <%=// beach.name %></h3> -->
+            <p> Edit your comment </p>
+            <form action="/beaches/<%=beach_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" id="desc" name="comment[text]"><%=comment.text%></textarea>
+                </div>
+                <div class="form-group">
+                     <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/beaches/<%=beach_id%>">Back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+<div class="container pt-3">
+    <header class="jumbotron">
+        <a class ="btn btn-primary btn-lg" href="/beaches/new">Add New Beach</a>
+    </header>
+    
+    <div class="row d-flex flex-wrap">
+        <% beaches.forEach(beach => { %>
+            <div class=" col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="<%= beach.image %>" alt="Card image cap">
+                    <div class="card-body">
+                      <a href="beaches/<%=beach._id%>"><h2 class="card-title"><%= beach.name %></h2></a>
+                      <p class="card-text"><%=beach.desc%></p>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+<% include ../partials/footer %>
