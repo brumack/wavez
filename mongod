@@ -1,0 +1,1 @@
+mongod --dpath=data --nojournal
