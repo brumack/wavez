@@ -5,7 +5,7 @@ const User = require('../models/user')
 const middleware = require('../middleware')
 
 router.get('/', (req, res) => {
-    res.redirect('/beaches')
+    res.render('landing')
 })
 
 router.get(`/login`, (req, res) => {

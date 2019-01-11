@@ -1,9 +1,12 @@
 html {
-    height: 100vh;
+    height: 100%;
 }
 
 body {
-    height: 100%;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
 }
 
 h1, h2 {
@@ -31,7 +34,52 @@ a:hover {
 }
 
 footer {
+    position: absolute;
+    top: 100%;
     width: 100%;
     background-color: #007bff;
     text-align: center;
+    margin: 0;
+    color: white;
+    font-family: Raleway
+}
+
+.landing {
+    font-family: Raleway;
+    height: 100%;
+}
+
+.landing h1 {
+    font-family: 'Permanent Marker';
+    color: white;
+    font-size: 12rem;
+    text-shadow: 2px 2px 2px black;
+    margin-bottom: -40px;
+    padding: 0;
+}
+
+.landing p {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 1px 1px 1px black;
+}
+
+.landing a {
+    margin: 10px 0;
+}
+
+#landingVideo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  width: auto; 
+  height: auto;
+  z-index: -100;
+}
+
+.flash {
+    margin-top: 5px;
 }

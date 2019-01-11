@@ -1,6 +1,6 @@
 const   methodOverride  = require('method-override'),
         LocalStrategy   = require('passport-local'),
-        flash    = require('connect-flash'),
+        flash           = require('connect-flash'),
         bodyParser      = require('body-parser'),
         mongoose        = require('mongoose'),
         passport        = require('passport'),
@@ -13,9 +13,8 @@ const   beachRoutes     = require('./routes/beaches'),
         commentRoutes   = require('./routes/comments'),
         indexRoutes     = require('./routes/index')
 
-// mongoose.connect(`mongodb://localhost:27017/beach_camp`, { useNewUrlParser: true })
-// mongoose.connect(`mongodb://brad.rumack:04MiniMC40@ds153304.mlab.com:53304/wavez`, { useNewUrlParser: true })
 mongoose.connect(process.env.DBURL, { useNewUrlParser: true})
+
 app.use(bodyParser.urlencoded({extended:true}))
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + `/public`))
@@ -46,8 +45,6 @@ app.use((req, res, next) => {
 app.use(indexRoutes)
 app.use('/beaches/:id/comments', commentRoutes)
 app.use('/beaches', beachRoutes)
-
-// const seedDB = require('./seed')()
 
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log(`Server running on port ${process.env.PORT}`)
