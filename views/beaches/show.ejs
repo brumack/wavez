@@ -1,16 +1,16 @@
 <% include ../partials/header %>
     <div class="container mt-3">
         <div class="row justify-content-left">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class='row align-items-end'>
-                    <div class="col-xs-12 col-md-7 beach-header">
+            <div class="col-12">
+                <div class='row align-items-end mb-3'>
+                    <div class="col-sm-6 col-xs-12 beach-header">
                         <a href="https://en.wikipedia.org/w/index.php?search=<%=beach.name%>" target='_blank'><h4 class=""><%= beach.name %></h4></a>
                         <a href="https://www.google.com/maps/@<%=beach.coordinates.lat+ "," + beach.coordinates.lon%>,15z" target="_blank">
                             <h6><%=beach.coordinates.lat + "° | " + beach.coordinates.lon + "°"%></h6>
                         </a>
                     </div>
                     <% if (weather) { %>
-                    <div class="d-none d-md-inline-block col-5 forecast-outer">
+                    <div class="d-none d-sm-inline-block col-6 forecast-outer">
                         <div>
                             <div class="card-body forecast">
                                 <h5 class="card-title"><strong>Upcoming Conditions</strong></h5>
@@ -26,7 +26,7 @@
             </div>
         </div> 
         <div class='row justify-content-center'>
-            <div class="col-12 col-md-8 col-lg-6">
+            <div class="col-12 col-md-6">
                 <div class="card show mb-1">
                     <img class="card-img-top" src="<%= beach.image.split('?')[0] %>" alt="Card image cap">
                     <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?markers=
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class='col-12 col-md-4 col-lg-6'>
+            <div class='col-12 col-md-6 d'>
                 <div class='card mb-3'>
                     <div class="card-body">
                         <p class="card-text"><%=beach.desc%></p>
