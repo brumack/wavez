@@ -6,7 +6,7 @@ const getWeather = require('../scripts/getWeather')
 
 router.get('/', (req, res) => {
     if(req.query.search) {
-        const term = safeRegex(req.query.search)
+        const term = new RegExp(safeRegex(req.query.search), 'gi')
         Beach.find({name: term}, (err, beaches) => {
             if (err) {
                 console.log(err)
