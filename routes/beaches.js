@@ -5,13 +5,29 @@ const middleware = require('../middleware')
 const getWeather = require('../scripts/getWeather')
 
 router.get('/', (req, res) => {
-    Beach.find({}, (err, beaches) => {
-        if (err) {
-            console.log(err)
-        } else {
-            res.render('beaches/index', {beaches: beaches})
-        }
-    })
+    if(req.query.search) {
+        const term = safeRegex(req.query.search)
+        Beach.find({name: term}, (err, beaches) => {
+            if (err) {
+                console.log(err)
+            } else {
+                if (beaches.length > 0) {
+                    res.render('beaches/index', {beaches: beaches})
+                } else {
+                    res.render('beaches/index', {beaches: []})
+                }
+            }
+        })
+    } else {
+        Beach.find({}, (err, beaches) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.render('beaches/index', {beaches: beaches})
+            }
+        })
+    }
+    
 })
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
@@ -112,5 +128,9 @@ router.delete(`/:id`, middleware.checkBeachAuthor, (req, res) => {
         res.redirect('/beaches')
     })
 })
+
+function safeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
 
 module.exports = router
