@@ -19,7 +19,6 @@ const getWeather = function(lat, lon, callback) {
                 data = JSON.parse(body)
                 
                 if (data.properties.forecast) {
-                    console.log(data.properties.forecast)
                     options.url = data.properties.forecast
                     
                     request(options, (err, res, body) => {

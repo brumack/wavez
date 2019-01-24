@@ -2,18 +2,19 @@
     <div class="container mt-3">
         <div class="row justify-content-left">
             <div class="col-12 col-md-8 col-lg-6">
-                <div class="beach-header">
-                    <a href="https://en.wikipedia.org/w/index.php?search=<%=beach.name%>" target='_blank'><h4 class=""><%= beach.name %></h4></a>
-                    <a href="https://www.google.com/maps/@<%=beach.coordinates.lat+ "," + beach.coordinates.lon%>,15z" target="_blank">
-                        <h6><%=beach.coordinates.lat + "° | " + beach.coordinates.lon + "°"%></h6>
-                    </a>
-                </div>
-                <% if (weather) { %>
-                    <div class="col-4 d-none d-sm-inline-block forecast-outer">
+                <div class='row align-items-end'>
+                    <div class="col-xs-12 col-md-7 beach-header">
+                        <a href="https://en.wikipedia.org/w/index.php?search=<%=beach.name%>" target='_blank'><h4 class=""><%= beach.name %></h4></a>
+                        <a href="https://www.google.com/maps/@<%=beach.coordinates.lat+ "," + beach.coordinates.lon%>,15z" target="_blank">
+                            <h6><%=beach.coordinates.lat + "° | " + beach.coordinates.lon + "°"%></h6>
+                        </a>
+                    </div>
+                    <% if (weather) { %>
+                    <div class="d-none d-md-inline-block col-5 forecast-outer">
                         <div>
-                            <div class="card-body forecast float-right">
+                            <div class="card-body forecast">
                                 <h5 class="card-title"><strong>Current Conditions</strong></h5>
-                                <img src="<%=weather.icon%>" class="float-right">
+                                <img src="<%=weather.icon%>" class="float-right pb-1">
                                 <p class="card-text"><%=weather.shortForecast%></p>
                                 <p class="card-text"><%=weather.temperature + weather.temperatureUnit%></p>
                                 <p class="card-text">Wind: <%=weather.windSpeed + ' ' + weather.windDirection%></p>
@@ -21,6 +22,7 @@
                         </div>
                     </div> 
                 <% } %>
+                </div>
             </div>
         </div> 
         <div class='row justify-content-center'>
