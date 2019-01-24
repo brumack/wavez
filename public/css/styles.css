@@ -1,16 +1,25 @@
-html {
-    height: 100%;
-}
-
-body {
-    position: relative;
+* {
+    padding: 0;
     margin: 0;
-    padding-bottom: 6rem;
-    min-height: 100%;
 }
 
-h1, h2 {
-    text-align: center;
+html, body {
+    height: 100%;
+    font-family: Raleway;
+}
+
+nav {
+    z-index: 1;
+}
+
+/* NAV */
+
+.navbar-dark {
+    background-color: #00ccff;
+}
+
+.navbar-toggler {
+    z-index: 100;
 }
 
 #logo {
@@ -21,32 +30,123 @@ h1, h2 {
     font-family: 'Permanent Marker';
 }
 
-.card-img-top {
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+
+/* SHARED BY ALL VIEWS */
+
+.container-fluid {
+    padding:0;
+    min-height: 100%;
+}
+
+.jumbotron {
+    padding: 10px;
+}
+
+.alert {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.flash {
     width: 100%;
+    height: 50px;
 }
 
-a:hover {
-    text-decoration: none;
+.row {
+    margin: 0;
+    padding: 0;
 }
 
-.comments {
-    background-color: #eee;
+.outer h1 {
+    text-align: center;
+}
+
+.outer .row {
+    width: 100%;
 }
 
 footer {
-    position: absolute;
-    top: 100%;
     width: 100%;
-    background-color: #007bff;
-    text-align: center;
-    margin: 0;
+    background-color: #00ccff;
     color: white;
-    font-family: Raleway
+    font-family: Raleway;
+    padding: 15px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
 }
 
+footer p {
+    font-size: 13px;
+    line-height: 1px;
+}
+
+.left-text {
+    text-align: left;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.middle-text {
+    text-align:center;
+}
+
+.medium-text {
+    font-size: 2.25rem;
+}
+
+.big-text {
+    font-size: 3.5rem;
+}
+
+.bigger-text {
+    font-size: 4rem;
+}
+
+/* LANDING PAGE */
+
 .landing {
-    font-family: Raleway;
+    width: 100%;
     height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+
+.landing .row {
+    height: 100%;
+}
+
+.btn-primary {
+    background-color: #00ccff;
+}
+
+.beach-header {
+    vertical-align: bottom;
+    float: left;
+}
+
+.beach-header h4 {
+    font-family: 'Permanent Marker';
+    font-size: 3rem;
+}
+
+.beach-header p {
+    font-size: .75rem;
+}
+
+.landing .row {
+    height: 100%;
+}
+
+.landing footer {
+    display: none;
 }
 
 .landing h1 {
@@ -54,15 +154,15 @@ footer {
     color: white;
     font-size: 12rem;
     text-shadow: 2px 2px 2px black;
-    margin-bottom: -40px;
-    padding: 0;
+    text-align: left;
 }
 
-.landing p {
+.landing h2 {
     color: white;
     font-size: 2rem;
-    margin: 0;
     text-shadow: 1px 1px 1px black;
+    z-index: -1;
+    margin-top: -45px;
 }
 
 .landing a {
@@ -70,16 +170,164 @@ footer {
 }
 
 #landingVideo {
-  position: absolute;
-  left: 0;
-  top: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  width: auto; 
-  height: auto;
-  z-index: -100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: -100;
 }
 
-.flash {
-    margin-top: 5px;
+/* LOGIN/SIGNUP/LEAVE COMMENT */
+
+.login {
+    margin-top: 100px;
+}
+
+form i {
+    font-size: 50px;
+}
+
+.login footer {
+    position: absolute;
+    bottom: 0;
+}
+
+/* INDEX PAGE */
+
+.FAR {
+    text-align: right;
+}
+
+.jumbotron li {
+    list-style: none;
+    line-height: 2.25rem;
+}
+
+.add {
+    font-family: 'Satisfy';
+    color: #00ccff;
+}
+
+.find {
+    font-family: 'Abril Fatface';
+    color: #0086a8;
+}
+.review {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    color: #003f4f;
+}
+
+.ABEACH {
+    font-size: 7rem;
+    font-family: 'Permanent Marker';
+}
+
+.card-body {
+    padding: 0;
+}
+
+.card-body h2 {
+    text-align: center;
+    font-family: 'Permanent Marker';
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+
+/* 'SHOW' PAGE */
+
+.card {
+    border: none;
+    min-height: 100%;
+}
+
+.card-img-top {
+    width: 100%;
+}
+
+.card-text:last-of-type {
+    font-size: .75rem;
+}
+
+.comments {
+    background-color: #eee;
+}
+
+
+.forecast {
+    font-family: Raleway;
+    text-align: right;
+    width: 100%;
+    padding: 0;
+    margin-top: 25px;
+}
+
+.forecast-outer {
+    padding: 0;
+    float: right;
+}
+
+.forecast img {
+    width: 40px;
+}
+
+.forecast .card-title {
+    font-size: .7rem;
+    margin-bottom: 5px;
+}
+
+.forecast .card-text {
+    font-size: .6rem;
+
+}
+.forecast img {
+    margin-left: 10px;
+}
+
+.forecast p {
+    margin: 0;
+}
+
+.coordinate {
+    width: 48%;
+}
+
+.button-group {
+    margin: 10px;
+}
+
+.button-group p {
+    margin-bottom: 0;
+}
+
+
+
+
+/* MOBILE */
+
+.mobile {
+    text-align: center;
+}
+
+.mobile h1 {
+    font-family: 'Permanent Marker';
+    color: white;
+    font-size: 3rem;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+    margin-top: -40px;
+}
+
+.mobile a {
+    margin-top: 10px;
+}
+
+.buffer {
+    height: 100px;
 }

@@ -17,6 +17,11 @@ const beachSchema = new mongoose.Schema({
             ref: "Comment"
         }
     ],
+    coordinates: {
+        lat: String,
+        lon: String
+    },
+    city: String,
     created: Date
 })
 

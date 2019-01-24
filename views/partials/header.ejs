@@ -6,11 +6,28 @@
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
             crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/css/styles.css">
-        <link href="https://fonts.googleapis.com/css?family=Raleway|Permanent+Marker" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Raleway|Permanent+Marker|Abril+Fatface|Satisfy|Montserrat" rel="stylesheet">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class='container-fluid'>
+        <div class='row justify-content-center'>
+            <% if (error && error.length > 0) { %>
+              <% error.forEach(err => { %>
+                <div class="col-12 flash alert alert-danger" role="alert">
+                <%=error%>
+              </div>
+              <% }) %> 
+            <% } %>
+            
+            <% if (success && success.length > 0) { %>
+              <div class="col-12 flash alert alert-success" role="alert">
+                <%=success%>
+              </div>
+            <% } %>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark">
           <a class="navbar-brand" href="/beaches"><img class="m-2" id="logo" src="../images/wavez_logo.png">Wavez</a>
+          
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -18,16 +35,29 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <% if (!currentUser) { %>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="/login">Login</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="/signup">Signup</a>
                 </li>
               <% } else { %>
                 <li class="nav-item active">
                   <p class="nav-link m-0">Hi <%=currentUser.username%>!</p> 
                 </li>
+                <% if (currentUser && currentUser.isAdmin) { %>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      ADMIN
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/users">Users</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                <% } %>
                 <li class="nav-item">
                   <a class="nav-link" href="/logout">Logout</a>
                 </li>
@@ -35,21 +65,6 @@
             </ul>
           </div>
         </nav>
-        
-        <div class="container flash">
-          <% if (error && error.length > 0) { %>
-            <% error.forEach(err => { %>
-              <div class="alert alert-danger" role="alert">
-              <%=error%>
-            </div>
-            <% }) %> 
-          <% } %>
           
-          <% if (success && success.length > 0) { %>
-            <div class="alert alert-success" role="alert">
-              <%=success%>
-            </div>
-          <% } %>
-        </div>
 
     

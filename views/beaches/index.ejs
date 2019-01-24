@@ -1,22 +1,72 @@
 <% include ../partials/header %>
-
-<div class="container pt-3">
-    <header class="jumbotron">
-        <a class ="btn btn-primary btn-lg" href="/beaches/new">Add New Beach</a>
-    </header>
-    
-    <div class="row d-flex flex-wrap">
-        <% beaches.forEach(beach => { %>
-            <div class=" col-md-6 col-lg-4">
-                <div class="card">
-                    <img class="card-img-top" src="<%= beach.image %>" alt="Card image cap">
-                    <div class="card-body">
-                      <a href="beaches/<%=beach._id%>"><h2 class="card-title"><%= beach.name %></h2></a>
+        <header class="jumbotron">
+            <div class='row d-none d-lg-flex align-items-center'>
+                <div class='col-lg-5 FAR'>
+                    <ul>
+                        <li class='add bigger-text'>Add</li>
+                        <li class='find bigger-text'>Find</li>
+                        <li class='review bigger-text'>Review</li>
+                    </ul>
+                </div>
+                <div class='col-lg-7 ABEACH'>
+                    <div>A Beach</div>
+                </div>
+                <div class='col-lg-12 middle-text'>
+                    <a class ="btn btn-primary btn-sm" href="/beaches/new">Add A Beach</a>
+                    <a class ="btn btn-primary btn-sm">Find a Beach</a>
+                </div>
+            </div>
+            
+            <div class='row d-none d-md-flex d-lg-none'>
+                <div class='col-xs-12 col-sm-12 middle-text'>
+                    <span class='add right-text bigger-text'>add.</span>
+                    <span class='find middle-text bigger-text'>find.</span>
+                    <span class='review left-text bigger-text'>review.</span>
+                    <div>
+                        <a class ="btn btn-primary btn-sm" href="/beaches/new">Add A Beach</a>
+                        <a class ="btn btn-primary btn-sm">Find a Beach</a>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class='row d-none d-sm-flex d-md-none'>
+                <div class='col-12 middle-text'>
+                    <span class='add right-text big-text'>add.</span>
+                    <span class='find middle-text big-text'>find.</span>
+                    <span class='review left-text big-text'>review.</span>
+                    <div>
+                        <a class ="btn btn-primary btn-sm" href="/beaches/new">Add A Beach</a>
+                        <a class ="btn btn-primary btn-sm">Find a Beach</a>
                     </div>
                 </div>
             </div>
-        <% }) %>
+            
+            <div class='row d-sm-none'>
+                <div class='col-12 middle-text'>
+                    <span class='add right-text medium-text'>add.</span>
+                    <span class='find middle-text medium-text'>find.</span>
+                    <span class='review left-text medium-text'>review.</span>
+                    <div>
+                        <a class ="btn btn-primary btn-sm" href="/beaches/new">Add A Beach</a>
+                        <a class ="btn btn-primary btn-sm">Find a Beach</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    <div class="container">
+        <div class="row d-flex flex-wrap">
+            <% beaches.forEach(beach => { %>
+                <div class=" col-md-6 col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="<%= beach.image %>" alt="Card image cap">
+                        <div class="card-body">
+                          <a href="beaches/<%=beach._id%>"><h2 class="card-title"><%= beach.name %></h2></a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
-</div>
 
 <% include ../partials/footer %>

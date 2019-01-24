@@ -1,14 +1,24 @@
 <% include partials/header %>
-    <div class="landing container">
+    <div class="container outer landing">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-6">
+            
+            <div class="col-md-9 col-lg-7 col-xl-6 d-none d-md-inline-block">
                 <h1>Wavez</h1>
-                <p>Grab your board</p>
+                <h2>Grab your board</h2>
                 <a href="/beaches" class="btn btn-primary btn-lg">Find your spot</a>
             </div>
+            
+            <div class="d-md-none mobile">
+                <img src="../images/wavez_logo2.png">
+                <h1>Waves</h1>
+                <a href="/beaches" class="btn btn-primary btn-sm">Find your spot</a>
+            </div>
+            
         </div>
-    </div>
-    <video autoplay muted loop id="landingVideo">
-        <source src="video/landingVideo.mp4" type="video/mp4">
-    </video>
-<% include partials/footer %>
+        
+        <video autoplay muted loop id="landingVideo">
+            <source src="video/landingVideo.mp4" type="video/mp4">
+        </video>
+    
+    <% include partials/footer %>
+    

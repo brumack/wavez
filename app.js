@@ -11,9 +11,10 @@ const   methodOverride  = require('method-override'),
         
 const   beachRoutes     = require('./routes/beaches'),
         commentRoutes   = require('./routes/comments'),
-        indexRoutes     = require('./routes/index')
+        indexRoutes     = require('./routes/index'),
+        userRoutes      = require('./routes/users')
 
-mongoose.connect(process.env.DBURL, { useNewUrlParser: true})
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true})
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.set('view engine', 'ejs')
@@ -45,6 +46,11 @@ app.use((req, res, next) => {
 app.use(indexRoutes)
 app.use('/beaches/:id/comments', commentRoutes)
 app.use('/beaches', beachRoutes)
+app.use('/users', userRoutes)
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
 
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log(`Server running on port ${process.env.PORT}`)

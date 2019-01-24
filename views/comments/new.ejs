@@ -1,11 +1,12 @@
 <% include ../partials/header %>
 
-<div class="container new">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="container login">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-8 col-md-5">
             <h3><%= beach.name %></h3>
             <p> Add a comment </p>
             <form action="/beaches/<%=beach._id%>/comments" method="POST">
+                <i class="fa fa-star-o" aria-hidden="true"></i>
                 <div class="form-group">
                     <textarea class="form-control" rows="5" id="desc" name="comment[text]" placeholder="Comment..."></textarea>
                 </div>

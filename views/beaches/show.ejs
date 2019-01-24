@@ -1,61 +1,96 @@
 <% include ../partials/header %>
-    <div class = "container pt-5">
-        <div class="row">
-            <div class="col-md-3">
-                <p>BeachCamp</p>
-                <ul class="list-group">
-                  <li class="list-group-item active">Category 1</li>
-                  <li class="list-group-item">Category 2</li>
-                  <li class="list-group-item">Category 3</li>
-                </ul>
+    <div class="container mt-3">
+        <div class="row justify-content-left">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="beach-header">
+                    <a href="https://en.wikipedia.org/w/index.php?search=<%=beach.name%>" target='_blank'><h4 class=""><%= beach.name %></h4></a>
+                    <a href="https://www.google.com/maps/@<%=beach.coordinates.lat+ "," + beach.coordinates.lon%>,15z" target="_blank">
+                        <h6><%=beach.coordinates.lat + "° | " + beach.coordinates.lon + "°"%></h6>
+                    </a>
+                </div>
+                <% if (weather) { %>
+                    <div class="col-4 d-none d-sm-inline-block forecast-outer">
+                        <div>
+                            <div class="card-body forecast float-right">
+                                <h5 class="card-title"><strong>Current Conditions</strong></h5>
+                                <img src="<%=weather.icon%>" class="float-right">
+                                <p class="card-text"><%=weather.shortForecast%></p>
+                                <p class="card-text"><%=weather.temperature + weather.temperatureUnit%></p>
+                                <p class="card-text">Wind: <%=weather.windSpeed + ' ' + weather.windDirection%></p>
+                            </div>
+                        </div>
+                    </div> 
+                <% } %>
             </div>
-            <div class="col-lg-9">
-                <div class="card show m-0">
+        </div> 
+        <div class='row justify-content-center'>
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card show mb-1">
                     <img class="card-img-top" src="<%= beach.image.split('?')[0] %>" alt="Card image cap">
-                    <div class="card-body p-3">
-                      <a href="#"><h4 class=""><%= beach.name %></h4></a>
-                      <p class="card-text"><%=beach.desc%></p>
-                      <p class="card-text">
-                          <em>Submitted by</em><strong> <%=beach.author.username%></strong>
-                          <br>
-                          <em><%=beach.created.toLocaleDateString(`en-US`, {year: 'numeric', month: 'long', day: 'numeric'})%></em>
-                      </p>
-                      <% if (currentUser && beach.author.id.equals(currentUser._id)) { %>
-                          <a href="/beaches/<%=beach._id%>/edit" class="btn btn-warning">Edit</a>
-                          <form action="/beaches/<%=beach._id%>?_method=DELETE" method="POST" class="d-inline">
-                              <button class="btn btn-danger">Delete</button>
-                          </form>
-                      <% } %>
-                      
+                    <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?markers=
+                    <%=beach.coordinates.lat + ',' + beach.coordinates.lon%>&zoom=12&size=600x200&maptype=roadmap
+                          &key=AIzaSyBwJ0unomu9slrhfamKxOBKV6Jw4q8ihW0">
+                    <div class='card-body mt-3 mb-3'>
+                        <% if (currentUser && (beach.author.id.equals(currentUser._id) || currentUser.isAdmin)) { %>
+                            <div class='float-right'>
+                                <a href="/beaches/<%=beach._id%>/edit" class="btn btn-warning">Edit</a>
+                                <form action="/beaches/<%=beach._id%>?_method=DELETE" method="POST" class="d-inline">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+                        <p class="card-text">
+                            <em>Submitted by</em><strong> <%=beach.author.username%></strong>
+                            <br>
+                            <em><%=beach.created.toLocaleDateString(`en-US`, {year: 'numeric', month: 'long', day: 'numeric'})%></em>
+                        </p>
                     </div>
                 </div>
-                <div class="card comments mt-3">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a class="btn btn-primary float-right" href="/beaches/<%=beach._id%>/comments/new">Leave a Comment</a>
-                                </div>
+            </div>
+            <div class='col-12 col-md-4 col-lg-6'>
+                <div class='card mb-3'>
+                    <div class="card-body">
+                        <p class="card-text"><%=beach.desc%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-12'>
+                <div class="card comments pt-3 pb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a class="btn btn-primary float-right" href="/beaches/<%=beach._id%>/comments/new">Leave a Comment</a>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <% beach.comments.forEach(comment => { %>
-                                <div class="col-md-12 float-none">
-                                    <span class="float-right"><%=comment.created.toLocaleDateString(`en-US`, {year: 'numeric', month: 'long', day: 'numeric'})%></span>
-                                    <h6 class="mb-1"><strong><%=comment.author.username %></strong></h6>
-                                    <p class="mb-0"><%= comment.text %></p>
-                                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <% beach.comments.forEach(comment => { %>
+                            <div class="col-md-12">
+                                <div class='clearfix'>
+                                    <p class="float-right"><%=comment.created.toLocaleDateString(`en-US`, {year: 'numeric', month: 'long', day: 'numeric'})%></p>
+                                    <h5 class="mb-1 float-left"><strong><%=comment.author.username %></strong></h6>
+                                </div>
+                                <p class='mb-1'><%= comment.text %></p>
+                                    
+                                <% if (currentUser && (comment.author.id.equals(currentUser._id) || currentUser.isAdmin)) { %>
+                                    <div class='button-group m-0'>
                                         <a class="btn btn-sm btn-warning" href="/beaches/<%=beach._id%>/comments/<%=comment._id%>/edit">Edit</a>
                                         <form action="/beaches/<%=beach._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST" class="d-inline">
                                           <button class="btn btn-sm ml-1 btn-danger">Delete</button>
                                         </form>
-                                    <% } %>
-                                </div>
+                                    </div>
+                                <% } %>
+                                
+                            </div> 
                             <% }) %>
-                            </div>
-                        </div>
-                    </div>
+                        </div> 
+                    </div> 
+                </div> 
             </div>
         </div>
     </div>
-    
+    <script src="../js/weather.js"></script>
 <% include ../partials/footer %>
+<!-- AIzaSyBwJ0unomu9slrhfamKxOBKV6Jw4q8ihW0 -->

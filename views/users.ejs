@@ -1,0 +1,29 @@
+<% include ./partials/header %>
+    <div class="container-fluid outer"> <!-- closing tag in footer partial-->
+        <div class="list-group">
+          <% users.forEach(user => { 
+            if (user._id.toString() !== self._id.toString()) { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="align-middle">
+                  <%=user.username%>
+                  <p>created on <%=user.created.toLocaleDateString()%></p>
+                </span>
+                <div class='button-group float-right'>
+                    <% if (!user.isBanned) { %>
+                      <form action="/users/<%=user._id%>/ban?_method=PUT" method="POST" class="d-inline">
+                        <button class="btn btn-sm ml-1 btn-danger">Delete</button>
+                      </form>
+                    <% } else { %>
+                      <form action="/users/<%=user._id%>/ban?_method=PUT" method="POST" class="d-inline">
+                        <button class="btn btn-sm ml-1 btn-danger">Delete</button>
+                      </form>
+                    <% } %>
+                    <form action="/users/<%=user._id%>?_method=DELETE" method="POST" class="d-inline">
+                      <button class="btn btn-sm ml-1 btn-danger">Delete</button>
+                    </form>
+                </div>
+              </li>
+            <% }
+          }) %>
+        </div>
+<% include ./partials/footer %>

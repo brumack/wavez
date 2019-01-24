@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Beach = require('../models/beach')
 const middleware = require('../middleware')
+const getWeather = require('../scripts/getWeather')
 
 router.get('/', (req, res) => {
     Beach.find({}, (err, beaches) => {
@@ -20,18 +21,37 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
         username: req.user.username
     }
     
-    beach.author = author
-    beach.created = new Date()
- 
-    Beach.create(beach, (err, result) => {
-        if (err) {
-            console.log(err)
-            req.flash("error", `Error adding beach. ${err.message}`)
-        } else {
-            req.flash("success", "Beach added")
-            res.redirect(`beaches/${result._id}`)
-        }
-    })
+    let lat, lon
+    
+    try {
+        lat = Number(beach.coordinates.lat);
+        lon = Number(beach.coordinates.lon);
+    } catch (e) {
+        console.log(e)
+        req.flash("error", `Error adding beach. Invalid coordinates.`)
+        return
+    }
+    
+    if (lat * 1000 < -90000 || lat * 1000 > 90000) {
+        req.flash("error", `Error adding beach. Invalid coordinates.`)
+        res.redirect('/beaches/new')
+    } else if (lon * 1000 < -180000 || lat * 1000 > 180000) {
+        req.flash("error", `Error adding beach. Invalid coordinates.`)
+        res.redirect('/beaches/new')
+    } else {
+        beach.author = author
+        beach.created = new Date()
+        
+        Beach.create(beach, (err, result) => {
+            if (err) {
+                console.log(err)
+                req.flash("error", `Error adding beach. ${err.message}`)
+            } else {
+                req.flash("success", "Beach added")
+                res.redirect(`beaches/${result._id}`)
+            }
+       })
+    }
 })
 
 router.get('/new', middleware.isLoggedIn, (req, res) => {
@@ -45,7 +65,15 @@ router.get(`/:id`, (req, res) => {
             req.flash("error", `Error: Beach not found. ${err.message}`)
             res.redirect('back')
         } else {
-            res.render('./beaches/show', {beach: beach})
+            getWeather(beach.coordinates.lat, beach.coordinates.lon, (err,weather) => {
+                if (err) {
+                    console.log('there was an error')
+                    req.flash("error", `Error obtaining weather. ${err.message}`)
+                    res.render('./beaches/show', {beach: beach, weather: null})
+                } else {
+                    res.render('./beaches/show', {beach: beach, weather: weather})
+                }
+            })
         }
     })
 })

@@ -1,18 +1,22 @@
 <% include ../partials/header %>
 
-<div class="container p-5 mt-5 mb-5">
+<div class="container outer login">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
             <h1> Add new beach </h1>
-            <form action="/beaches" method="POST">
+            <form name="newBeach" action="/beaches" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="beach[name]" placeholder="Name">
+                    <input class="form-control" type="text" name="beach[name]" placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="beach[image]" placeholder="Image URL">
+                    <input class="form-control" type="text" name="beach[image]" placeholder="Image URL" required>
+                </div>
+                <div class="form-group clearfix">
+                    <input class="form-control coordinate float-left" type="text" name="beach[coordinates][lat]" placeholder="Lat Coordinate" required>
+                    <input class="form-control coordinate float-right" type="text" name="beach[coordinates][lon]" placeholder="Lon Coordinate" required>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="5" id="desc" name="beach[desc]" placeholder="Description"></textarea>
+                    <textarea class="form-control" rows="5" id="desc" name="beach[desc]" placeholder="Description" required></textarea>
                 </div>
                 <div class="form-group">
                      <button class="btn btn-lg btn-primary btn-block">Submit</button>
@@ -22,4 +26,5 @@
         </div>
     </div>
 </div>
+
 <% include ../partials/footer %>
